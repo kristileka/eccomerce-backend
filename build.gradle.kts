@@ -22,7 +22,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
