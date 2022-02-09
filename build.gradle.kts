@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
 }
 
-group = "com.example"
+group = "co.lunets"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -20,9 +20,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
-    implementation("com.zaxxer:HikariCP:4.0.3")
-
+    runtimeOnly("mysql:mysql-connector-java")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
