@@ -25,6 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+springBoot { mainClass.set("lunets.co.henez.HenezBackendApplication") }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
