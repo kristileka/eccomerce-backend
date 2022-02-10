@@ -16,7 +16,7 @@ import java.util.Arrays.*
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.cors().and().csrf().disable()
+        http.cors().configurationSource(corsConfigurationSource()).and().csrf().disable()
     }
 
     @Bean
