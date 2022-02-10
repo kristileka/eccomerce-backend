@@ -16,6 +16,7 @@ class CategoryController(
         return ResponseEntity.ok(categoryRepository.findAll())
     }
 
+    @CrossOrigin("*")
     @PostMapping
     fun createCategory(@Valid @RequestBody category: Category): ResponseEntity<Category> {
         return ResponseEntity.ok(categoryRepository.save(category))

@@ -16,11 +16,12 @@ class ProductController(
         return ResponseEntity.ok(productRepository.findAll())
     }
 
+    @CrossOrigin("*")
     @PostMapping
     fun createProduct(@Valid @RequestBody product: Product): ResponseEntity<Product> {
         return ResponseEntity.ok(productRepository.save(product))
     }
-
+    @CrossOrigin("*")
     @PatchMapping
     fun updateProduct(@RequestBody product: Product): ResponseEntity<Product> {
         return ResponseEntity.ok(productRepository.save(product))
