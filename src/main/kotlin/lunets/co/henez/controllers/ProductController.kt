@@ -20,9 +20,19 @@ class ProductController(
     fun createProduct(@Valid @RequestBody product: Product): ResponseEntity<Product> {
         return ResponseEntity.ok(productRepository.save(product))
     }
+
     @PatchMapping
     fun updateProduct(@RequestBody product: Product): ResponseEntity<Product> {
         return ResponseEntity.ok(productRepository.save(product))
+    }
+
+    @GetMapping("/category/{categoryId}")
+    fun getProductsByCategory(@PathVariable categoryId: String): ResponseEntity<List<Product>> {
+        return ResponseEntity.ok(productRepository.findAll().filter { it ->
+            it.categories.any {
+                it.id == categoryId.toLong()
+            }
+        })
     }
 
 }
