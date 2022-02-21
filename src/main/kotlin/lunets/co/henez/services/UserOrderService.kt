@@ -5,4 +5,5 @@ import lunets.co.henez.jpa.entities.UserOrder
 
 interface UserOrderService {
     fun createOrder(userOrderRequestDTO: UserOrderRequestDTO): UserOrder
+    fun getOrders(): List<UserOrder>
 }

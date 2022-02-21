@@ -16,13 +16,13 @@ class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @ElementCollection
-    @Column(name = "image")
-    var images: List<String> = listOf()
-
     @NotBlank(message = "Name is mandatory")
     @Column(name = "name")
     var name: String? = null
+
+    @ElementCollection
+    @Column(name = "image")
+    var images: List<String> = listOf()
 
     @NotBlank(message = "Code is mandatory")
     @Column(name = "code", unique = true)
@@ -30,6 +30,11 @@ class Product {
 
     @Column(name = "price")
     var price: Double? = 0.0
+
+
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "currentProduct")
+    var availableStocks: MutableList<AvailableStock> = mutableListOf()
+
 
     @NotBlank(message = "Description is mandatory")
     @Column(name = "description")

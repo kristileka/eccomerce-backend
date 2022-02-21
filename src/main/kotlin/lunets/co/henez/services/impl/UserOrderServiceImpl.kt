@@ -2,10 +2,12 @@ package lunets.co.henez.services.impl
 
 import lunets.co.henez.dto.UserOrderRequestDTO
 import lunets.co.henez.jpa.entities.OrderItem
+import lunets.co.henez.jpa.entities.Product
 import lunets.co.henez.jpa.entities.UserOrder
 import lunets.co.henez.jpa.repositories.OrderItemRepository
 import lunets.co.henez.jpa.repositories.ProductRepository
 import lunets.co.henez.jpa.repositories.UserOrderRepository
+import lunets.co.henez.services.PaymentService
 import lunets.co.henez.services.UserOrderService
 import org.springframework.stereotype.Service
 
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Service
 class UserOrderServiceImpl(
     private val userOrderRepository: UserOrderRepository,
     private val productRepository: ProductRepository,
-    private val orderItemRepository: OrderItemRepository
+    private val orderItemRepository: OrderItemRepository,
+    private val paymentService: PaymentService
 ) : UserOrderService {
     override fun createOrder(userOrderRequestDTO: UserOrderRequestDTO): UserOrder {
+
+
         val products = productRepository.findByIdIn(userOrderRequestDTO.orderItems.map {
             it.productId
         })
@@ -33,6 +38,12 @@ class UserOrderServiceImpl(
                 this.userOrder = userOrder
             })
         }
+
+
         return userOrderRepository.save(userOrder)
+    }
+
+    override fun getOrders(): List<UserOrder> {
+        return userOrderRepository.findAll()
     }
 }

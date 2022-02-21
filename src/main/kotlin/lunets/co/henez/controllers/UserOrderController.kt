@@ -19,4 +19,9 @@ class UserOrderController(
     fun createOrder(@Valid @RequestBody userOrder: UserOrderRequestDTO): ResponseEntity<UserOrder> {
         return ResponseEntity.ok(userOrderService.createOrder(userOrder))
     }
+
+    @GetMapping
+    fun getOrders(): ResponseEntity<List<UserOrder>> {
+        return ResponseEntity.ok(userOrderService.getOrders())
+    }
 }

@@ -1,11 +1,9 @@
 package lunets.co.henez.jpa.repositories
 
-import lunets.co.henez.jpa.entities.Category
-import lunets.co.henez.jpa.entities.OrderItem
-import lunets.co.henez.jpa.entities.UserOrder
-import lunets.co.henez.jpa.entities.Product
+import lunets.co.henez.jpa.entities.*
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
+import java.util.*
 
 
 interface CategoryRepository : JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
@@ -15,10 +13,15 @@ interface CategoryRepository : JpaRepository<Category, Long>, JpaSpecificationEx
 interface ProductRepository : JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
     override fun findAll(): List<Product>
     fun findByIdIn(ids: List<Long>): List<Product>
+    override fun findById(id: Long): Optional<Product>
 }
 
 interface OrderItemRepository : JpaRepository<OrderItem, Long>, JpaSpecificationExecutor<OrderItem> {
     override fun findAll(): List<OrderItem>
+}
+
+interface AvailableStockRepository : JpaRepository<AvailableStock, Long>, JpaSpecificationExecutor<AvailableStock> {
+    override fun findAll(): List<AvailableStock>
 }
 
 interface UserOrderRepository : JpaRepository<UserOrder, Long>, JpaSpecificationExecutor<UserOrder> {

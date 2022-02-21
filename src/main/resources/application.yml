@@ -7,7 +7,7 @@ spring:
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
 server:

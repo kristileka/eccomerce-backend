@@ -27,6 +27,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.braintreepayments.gateway:braintree-java:2.22.2")
+
 }
 springBoot { mainClass.set("lunets.co.henez.HenezBackendApplicationKt") }
 

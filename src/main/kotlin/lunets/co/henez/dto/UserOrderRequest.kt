@@ -8,6 +8,10 @@ data class UserOrderRequestDTO(
     var phoneNumber: String,
 )
 
+data class PaymentDetails(
+    var nonce: String
+)
+
 data class OrderItemDTO(
     var productId: Long,
     var quantity: Int
