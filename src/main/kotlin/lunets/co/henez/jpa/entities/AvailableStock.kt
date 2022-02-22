@@ -16,9 +16,6 @@ class AvailableStock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @Column(name = "type")
-    var type: String? = null
-
     @Column(name = "color")
     var color: String? = null
 

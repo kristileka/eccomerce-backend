@@ -31,6 +31,8 @@ class Product {
     @Column(name = "price")
     var price: Double? = 0.0
 
+    @Column(name = "type")
+    var type: String? = null
 
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "currentProduct")
     var availableStocks: MutableList<AvailableStock> = mutableListOf()
