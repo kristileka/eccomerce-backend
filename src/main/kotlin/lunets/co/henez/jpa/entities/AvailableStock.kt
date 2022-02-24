@@ -19,6 +19,9 @@ class AvailableStock {
     @Column(name = "color")
     var color: String? = null
 
+    @Column(name = "color_hex")
+    var colorHex: String? = null
+
     @Column(name = "side")
     var side: String? = null
 
