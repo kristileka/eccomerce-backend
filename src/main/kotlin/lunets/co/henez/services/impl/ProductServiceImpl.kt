@@ -41,13 +41,25 @@ class ProductServiceImpl(
         }
     }
 
+    override fun removeStocks(id: String, listAvailableStock: List<Int>): Product? {
+        val product = productRepository.findById(id.toLong())
+        if (product.isPresent) {
+            val foundProduct = product.get()
+            val stocks = product.get().availableStocks.filter { listAvailableStock.contains(it.id!!.toInt()) }
+            foundProduct.availableStocks.removeAll { listAvailableStock.contains(it.id!!.toInt()) }
+            productRepository.save(
+                foundProduct
+            )
+            availableStockRepository.deleteAll(stocks)
+            return foundProduct
+        }
+        return null
+    }
+
     override fun overrideProduct(id: String, product: Product): Product {
         return productRepository.save(product.apply {
             this.id = id.toLong()
         })
     }
 
-    private fun updateStocks(stockList: List<AvailableStock>): List<AvailableStock> {
-        return availableStockRepository.saveAll(stockList)
-    }
 }

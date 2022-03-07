@@ -34,11 +34,19 @@ class ProductController(
     }
 
     @PatchMapping("/{id}/add/stock")
-    fun addStock(
+    fun addStocks(
         @PathVariable("id") id: String,
         @RequestBody listAvailableStock: List<AvailableStock>
     ): ResponseEntity<Product> {
         return ResponseEntity.ok(productService.addStock(id, listAvailableStock))
+    }
+
+    @PatchMapping("/{id}/remove/stock")
+    fun removeStocks(
+        @PathVariable("id") id: String,
+        @RequestBody listAvailableStock: List<Int>
+    ): ResponseEntity<Product> {
+        return ResponseEntity.ok(productService.removeStocks(id, listAvailableStock))
     }
 
     @GetMapping("/category/{categoryId}")

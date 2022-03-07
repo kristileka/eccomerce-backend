@@ -22,6 +22,8 @@ interface OrderItemRepository : JpaRepository<OrderItem, Long>, JpaSpecification
 
 interface AvailableStockRepository : JpaRepository<AvailableStock, Long>, JpaSpecificationExecutor<AvailableStock> {
     override fun findAll(): List<AvailableStock>
+    fun findByIdIn(ids: List<Long>): List<AvailableStock>
+
 }
 
 interface UserOrderRepository : JpaRepository<UserOrder, Long>, JpaSpecificationExecutor<UserOrder> {
