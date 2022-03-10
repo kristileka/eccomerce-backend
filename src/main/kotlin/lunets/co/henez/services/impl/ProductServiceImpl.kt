@@ -3,6 +3,7 @@ package lunets.co.henez.services.impl
 import lunets.co.henez.jpa.entities.AvailableStock
 import lunets.co.henez.jpa.entities.Product
 import lunets.co.henez.jpa.repositories.AvailableStockRepository
+import lunets.co.henez.jpa.repositories.CategoryRepository
 import lunets.co.henez.jpa.repositories.ProductRepository
 import lunets.co.henez.services.ProductService
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service
 @Service
 class ProductServiceImpl(
     private val productRepository: ProductRepository,
-    private val availableStockRepository: AvailableStockRepository
+    private val availableStockRepository: AvailableStockRepository,
+    private val categoryRepository: CategoryRepository
 ) : ProductService {
 
     override fun addStock(id: String, listAvailableStock: List<AvailableStock>): Product {
@@ -57,8 +59,10 @@ class ProductServiceImpl(
     }
 
     override fun overrideProduct(id: String, product: Product): Product {
+        val categories = categoryRepository.findByIdIn(product.categories.mapNotNull { it.id })
         return productRepository.save(product.apply {
             this.id = id.toLong()
+            this.categories = categories
         })
     }
 

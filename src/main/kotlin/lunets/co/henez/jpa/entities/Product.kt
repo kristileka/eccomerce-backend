@@ -62,6 +62,9 @@ class Product {
     @Column(name = "new_product")
     var newProduct: Boolean? = false
 
+    @Column(name = "new_product_type")
+    var newProductType: String? = "All"
+
     @Column(name = "created_at")
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 

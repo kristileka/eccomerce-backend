@@ -7,6 +7,7 @@ import java.util.*
 
 
 interface CategoryRepository : JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
+    fun findByIdIn(ids: List<Long>): List<Category>
     override fun findAll(): List<Category>
 }
 
