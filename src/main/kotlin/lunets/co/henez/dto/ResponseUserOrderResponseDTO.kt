@@ -27,5 +27,6 @@ data class ResponsePaymentDetailsDTO(
 
 data class ResponseOrderStockItemDTO(
     var availabilityId: Int?,
+    var name: String?,
     var quantity: Int?
 )

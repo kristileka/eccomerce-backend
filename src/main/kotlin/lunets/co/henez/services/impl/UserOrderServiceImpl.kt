@@ -26,9 +26,19 @@ class UserOrderServiceImpl(
         if (userOrderRequestDTO.orderItems.any { orderItem -> orderItem.productId !in products.map { product -> product.id } }) {
             throw RuntimeException("Some of the Product Ids are not found")
         }
+        userOrderRequestDTO.orderItems.forEach { orderItemDTO ->
+            val currentProduct = products.first { it.id == orderItemDTO.productId }
+            if (orderItemDTO.orderStockItems.any { stock ->
+                    stock.availabilityId !in currentProduct.availableStocks.filter { it.stockQuantity >= stock.quantity }
+                        .map { it.id }
+                }) {
+                throw RuntimeException("Product is not available or not found. ")
+
+            }
+        }
         val totalPrice = getTotalPriceByUserOrder(userOrderRequestDTO, products)
 
-        var userOrder = UserOrder().apply {
+        val userOrder = UserOrder().apply {
             this.name = userOrderRequestDTO.name
             this.address = userOrderRequestDTO.address
             this.phoneNumber = userOrderRequestDTO.phoneNumber
@@ -82,26 +92,28 @@ class UserOrderServiceImpl(
     }
 
     private fun mapOrderItems(
-        orderItems: MutableList<OrderItem>,
-        products: List<Product>
+        orderItems: MutableList<OrderItem>, products: List<Product>
     ): List<ResponseOrderItemDTO> {
         return orderItems.map { orderItem ->
-            var currentProduct = products.first { it.id == orderItem.productId }
+            val currentProduct = products.first { it.id == orderItem.productId }
             ResponseOrderItemDTO(
                 productId = orderItem.productId.toInt(),
-                mainImage = currentProduct.images.firstOrNull(), productPrice = currentProduct.price,
+                mainImage = currentProduct.images.firstOrNull(),
+                productPrice = currentProduct.price,
                 productName = currentProduct.name,
-                orderStockItems = mapOrderItemStock(orderItem)
+                orderStockItems = mapOrderItemStock(orderItem, currentProduct)
             )
         }
 
     }
 
-    private fun mapOrderItemStock(orderItem: OrderItem): List<ResponseOrderStockItemDTO>? {
+    private fun mapOrderItemStock(orderItem: OrderItem, product: Product): List<ResponseOrderStockItemDTO>? {
         return orderItem.orderItemsStock.map { stockItem ->
+            val currentStock = product.availableStocks.first { it.id == stockItem.availableStockId }
             ResponseOrderStockItemDTO(
                 availabilityId = stockItem.availableStockId.toInt(),
-                quantity = stockItem.quantity
+                quantity = stockItem.quantity,
+                name = currentStock.name
             )
         }
 
@@ -112,8 +124,7 @@ class UserOrderServiceImpl(
     }
 
     private fun getTotalPriceByUserOrder(
-        userOrderRequestDTO: UserOrderRequestDTO,
-        listProducts: List<Product>
+        userOrderRequestDTO: UserOrderRequestDTO, listProducts: List<Product>
     ): Double {
         var totalPrice = 0.0
         userOrderRequestDTO.orderItems.map { orderItem ->
