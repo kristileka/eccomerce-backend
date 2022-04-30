@@ -145,7 +145,7 @@ class UserOrderServiceImpl(
         val order = userOrderRepository.findByOrderLocator(orderLocator)
         if (order.isPresent) {
             val products = productRepository.findByIdIn(order.get().orderItems.map {
-                it.id!!.toLong()
+                it.productId
             })
             return mapOrderResponse(order.get(), products)
         }
