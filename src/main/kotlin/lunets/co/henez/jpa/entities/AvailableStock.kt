@@ -26,21 +26,24 @@ class AvailableStock {
     var side: String? = null
 
     @Column(name = "size")
-    var size: String? = null
+    var size: Int? = null
 
     @Column(name = "stock_quantity")
-    var stockQuantity: String? = null
+    var stockQuantity: Int = 0
 
     @JsonIgnore
     @ManyToOne(cascade = [CascadeType.ALL], optional = true, fetch = FetchType.LAZY)
     var currentProduct: Product? = null
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
     @Column(name = "updated_at")
+    @JsonIgnore
     var updatedAt: Timestamp? = null
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     var deletedAt: Timestamp? = null
 }

@@ -15,15 +15,13 @@ class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @Column(name = "quantity")
-    var quantity = 0
-
-
     @JsonIgnore
     @ManyToOne(cascade = [CascadeType.ALL], optional = true, fetch = FetchType.LAZY)
     var userOrder: UserOrder? = null
 
-    @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    var product: Product? = null
+    @Column(name = "product_id")
+    var productId: Long = 0
+
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "orderItem")
+    var orderItemsStock: MutableList<OrderItemStock> = mutableListOf()
 }

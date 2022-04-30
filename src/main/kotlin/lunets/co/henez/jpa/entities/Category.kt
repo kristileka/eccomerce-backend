@@ -26,11 +26,14 @@ class Category {
     var newCategory: Boolean? = false
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
+    @JsonIgnore
     @Column(name = "updated_at")
     var updatedAt: Timestamp? = null
 
+    @JsonIgnore
     @Column(name = "deleted_at")
     var deletedAt: Timestamp? = null
 

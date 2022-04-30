@@ -1,5 +1,6 @@
 package lunets.co.henez.jpa.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.sql.Timestamp
 import java.time.LocalDateTime
@@ -66,11 +67,14 @@ class Product {
     var newProductType: String? = "All"
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
     @Column(name = "updated_at")
+    @JsonIgnore
     var updatedAt: Timestamp? = null
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     var deletedAt: Timestamp? = null
 }
