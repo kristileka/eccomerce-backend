@@ -21,8 +21,8 @@ class UserOrder {
     @Column(name = "name")
     var name: String? = null
 
-    @Column(name = "recordLocator")
-    var recordLocator: String? = null
+    @Column(name = "order_locator")
+    var orderLocator: String? = null
 
     @NotBlank(message = "Address is mandatory")
     @Column(name = "address")
@@ -31,6 +31,9 @@ class UserOrder {
     @NotBlank(message = "Address is mandatory")
     @Column(name = "city")
     var city: String? = null
+
+    @Column(name = "total_price")
+    var totalPrice: Double? = null
 
     @NotBlank(message = "Phone is mandatory")
     @Column(name = "phone_number")

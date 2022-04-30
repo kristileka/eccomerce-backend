@@ -26,4 +26,5 @@ interface AvailableStockRepository : JpaRepository<AvailableStock, Long>, JpaSpe
 
 interface UserOrderRepository : JpaRepository<UserOrder, Long>, JpaSpecificationExecutor<UserOrder> {
     override fun findAll(): List<UserOrder>
+    fun findByOrderLocator(orderLocator: String): Optional<UserOrder>
 }

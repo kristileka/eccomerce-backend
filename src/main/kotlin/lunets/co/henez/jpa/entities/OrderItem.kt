@@ -19,6 +19,9 @@ class OrderItem {
     @ManyToOne(cascade = [CascadeType.ALL], optional = true, fetch = FetchType.LAZY)
     var userOrder: UserOrder? = null
 
+    @Column(name = "price")
+    var price: Double? = null
+
     @Column(name = "product_id")
     var productId: Long = 0
 
