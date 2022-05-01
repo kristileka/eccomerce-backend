@@ -28,6 +28,12 @@ class UserOrder {
     @Column(name = "address")
     var address: String? = null
 
+    @Column(name = "status")
+    var status: String? = null
+
+    @Column(name = "note")
+    var note: String? = null
+
     @NotBlank(message = "Address is mandatory")
     @Column(name = "city")
     var city: String? = null

@@ -19,6 +19,9 @@ class Category {
     @Column(name = "name", unique = true)
     var name: String? = null
 
+    @Column(name = "name_sq", unique = true)
+    var nameSq: String? = null
+
     @Column(name = "icon")
     var icon: String? = null
 

@@ -6,6 +6,8 @@ data class ResponseUserOrderResponseDTO(
     var city: String?,
     var email: String?,
     var name: String?,
+    var status: String?,
+    var note: String?,
     var orderItems: List<ResponseOrderItemDTO>?,
     var paymentDetails: ResponsePaymentDetailsDTO?,
     var phoneNumber: String?,

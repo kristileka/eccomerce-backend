@@ -21,6 +21,10 @@ class Product {
     @Column(name = "name")
     var name: String? = null
 
+    @NotBlank(message = "Name is mandatory")
+    @Column(name = "name_sq")
+    var nameSq: String? = null
+
     @ElementCollection
     @Column(name = "image")
     var images: List<String> = listOf()
@@ -43,6 +47,10 @@ class Product {
     @Column(name = "description")
     var description: String? = null
 
+    @NotBlank(message = "Description is mandatory")
+    @Column(name = "description_sq")
+    var descriptionSq: String? = null
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "product_materials",
@@ -50,6 +58,14 @@ class Product {
         inverseJoinColumns = [JoinColumn(name = "material_id", referencedColumnName = "id")]
     )
     var materials: List<Material> = mutableListOf()
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "product_materials_sq",
+        joinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "material_id", referencedColumnName = "id")]
+    )
+    var materialsSq: List<Material> = mutableListOf()
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

@@ -48,9 +48,11 @@ class UserOrderServiceImpl(
             this.orderLocator = generateOrderLocator()
         }
         if (userOrderRequestDTO.paymentDetails.isPaymentCard) {
+            var paymentCommit =
+                paymentService.commitPayment(userOrderRequestDTO.paymentDetails.nonce ?: "", totalPrice) ;
             userOrder.isCardPayment = true
-            userOrder.isPaymentComplete =
-                paymentService.commitPayment(userOrderRequestDTO.paymentDetails.nonce ?: "", totalPrice)
+            userOrder.isPaymentComplete = paymentCommit
+            userOrder.status = if (paymentCommit) "Confirmed" else "Waiting for Approval"
         }
 
         userOrderRepository.save(userOrder)
@@ -86,9 +88,10 @@ class UserOrderServiceImpl(
             paymentDetails = mapPaymentDetails(order),
             orderItems = mapOrderItems(order.orderItems, products),
             totalPrice = order.totalPrice,
-            orderLocator = order.orderLocator
+            orderLocator = order.orderLocator,
+            status = order.status,
+            note = order.note
         )
-
     }
 
     private fun mapOrderItems(

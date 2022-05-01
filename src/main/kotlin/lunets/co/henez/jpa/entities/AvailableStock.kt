@@ -24,6 +24,8 @@ class AvailableStock {
 
     @Column(name = "name")
     var name: String? = null
+    @Column(name = "name_sq")
+    var nameSq: String? = null
 
     @Column(name = "side")
     var side: String? = null
