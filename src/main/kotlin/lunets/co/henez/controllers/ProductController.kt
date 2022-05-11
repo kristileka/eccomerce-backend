@@ -2,7 +2,6 @@ package lunets.co.henez.controllers
 
 import lunets.co.henez.jpa.entities.AvailableStock
 import lunets.co.henez.jpa.entities.Product
-import lunets.co.henez.jpa.repositories.AvailableStockRepository
 import lunets.co.henez.jpa.repositories.ProductRepository
 import lunets.co.henez.services.ProductService
 import org.springframework.http.ResponseEntity
@@ -18,6 +17,13 @@ class ProductController(
     @GetMapping
     fun getProducts(): ResponseEntity<List<Product>> {
         return ResponseEntity.ok(productRepository.findAll())
+    }
+
+    @GetMapping("/{id}")
+    fun getProducts(
+        @PathVariable("id") id: String,
+    ): ResponseEntity<Product> {
+        return ResponseEntity.ok(productRepository.findById(id.toLong()).get())
     }
 
     @PostMapping
