@@ -19,6 +19,9 @@ class Category {
     @Column(name = "name", unique = true)
     var name: String? = null
 
+    @Column(name = "name_sq", unique = true)
+    var nameSq: String? = null
+
     @Column(name = "icon")
     var icon: String? = null
 
@@ -26,11 +29,14 @@ class Category {
     var newCategory: Boolean? = false
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
+    @JsonIgnore
     @Column(name = "updated_at")
     var updatedAt: Timestamp? = null
 
+    @JsonIgnore
     @Column(name = "deleted_at")
     var deletedAt: Timestamp? = null
 

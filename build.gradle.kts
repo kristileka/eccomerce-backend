@@ -20,14 +20,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.projectlombok:lombok:1.18.20")
-    implementation("org.projectlombok:lombok:1.18.20")
+    implementation("org.projectlombok:lombok:1.18.24")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.3")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("com.braintreepayments.gateway:braintree-java:2.22.2")
+    implementation("com.braintreepayments.gateway:braintree-java:3.15.0")
 
 }
 springBoot { mainClass.set("lunets.co.henez.HenezBackendApplicationKt") }

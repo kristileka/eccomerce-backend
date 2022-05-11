@@ -22,25 +22,33 @@ class AvailableStock {
     @Column(name = "color_hex")
     var colorHex: String? = null
 
+    @Column(name = "name")
+    var name: String? = null
+    @Column(name = "name_sq")
+    var nameSq: String? = null
+
     @Column(name = "side")
     var side: String? = null
 
     @Column(name = "size")
-    var size: String? = null
+    var size: Int? = null
 
     @Column(name = "stock_quantity")
-    var stockQuantity: String? = null
+    var stockQuantity: Int = 0
 
     @JsonIgnore
     @ManyToOne(cascade = [CascadeType.ALL], optional = true, fetch = FetchType.LAZY)
     var currentProduct: Product? = null
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
     @Column(name = "updated_at")
+    @JsonIgnore
     var updatedAt: Timestamp? = null
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     var deletedAt: Timestamp? = null
 }

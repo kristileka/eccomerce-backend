@@ -1,5 +1,6 @@
 package lunets.co.henez.controllers
 
+import lunets.co.henez.dto.ResponseUserOrderResponseDTO
 import lunets.co.henez.dto.UserOrderRequestDTO
 import lunets.co.henez.jpa.entities.Product
 import lunets.co.henez.jpa.entities.UserOrder
@@ -16,8 +17,13 @@ class UserOrderController(
 ) {
 
     @PostMapping
-    fun createOrder(@Valid @RequestBody userOrder: UserOrderRequestDTO): ResponseEntity<UserOrder> {
+    fun createOrder(@Valid @RequestBody userOrder: UserOrderRequestDTO): ResponseEntity<ResponseUserOrderResponseDTO> {
         return ResponseEntity.ok(userOrderService.createOrder(userOrder))
+    }
+
+    @GetMapping("{orderLocator}")
+    fun createOrder(@PathVariable orderLocator: String): ResponseEntity<ResponseUserOrderResponseDTO> {
+        return ResponseEntity.ok(userOrderService.getOrderByLocator(orderLocator))
     }
 
     @GetMapping

@@ -1,5 +1,6 @@
 package lunets.co.henez.jpa.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.sql.Timestamp
 import java.time.LocalDateTime
@@ -19,6 +20,10 @@ class Product {
     @NotBlank(message = "Name is mandatory")
     @Column(name = "name")
     var name: String? = null
+
+    @NotBlank(message = "Name is mandatory")
+    @Column(name = "name_sq")
+    var nameSq: String? = null
 
     @ElementCollection
     @Column(name = "image")
@@ -42,6 +47,10 @@ class Product {
     @Column(name = "description")
     var description: String? = null
 
+    @NotBlank(message = "Description is mandatory")
+    @Column(name = "description_sq")
+    var descriptionSq: String? = null
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "product_materials",
@@ -49,6 +58,14 @@ class Product {
         inverseJoinColumns = [JoinColumn(name = "material_id", referencedColumnName = "id")]
     )
     var materials: List<Material> = mutableListOf()
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "product_materials_sq",
+        joinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "material_id", referencedColumnName = "id")]
+    )
+    var materialsSq: List<Material> = mutableListOf()
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -66,11 +83,14 @@ class Product {
     var newProductType: String? = "All"
 
     @Column(name = "created_at")
+    @JsonIgnore
     var createdAt: Timestamp? = Timestamp.valueOf(LocalDateTime.now())
 
     @Column(name = "updated_at")
+    @JsonIgnore
     var updatedAt: Timestamp? = null
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     var deletedAt: Timestamp? = null
 }

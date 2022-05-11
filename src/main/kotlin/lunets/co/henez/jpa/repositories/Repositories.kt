@@ -17,9 +17,6 @@ interface ProductRepository : JpaRepository<Product, Long>, JpaSpecificationExec
     override fun findById(id: Long): Optional<Product>
 }
 
-interface OrderItemRepository : JpaRepository<OrderItem, Long>, JpaSpecificationExecutor<OrderItem> {
-    override fun findAll(): List<OrderItem>
-}
 
 interface AvailableStockRepository : JpaRepository<AvailableStock, Long>, JpaSpecificationExecutor<AvailableStock> {
     override fun findAll(): List<AvailableStock>
@@ -29,4 +26,5 @@ interface AvailableStockRepository : JpaRepository<AvailableStock, Long>, JpaSpe
 
 interface UserOrderRepository : JpaRepository<UserOrder, Long>, JpaSpecificationExecutor<UserOrder> {
     override fun findAll(): List<UserOrder>
+    fun findByOrderLocator(orderLocator: String): Optional<UserOrder>
 }
